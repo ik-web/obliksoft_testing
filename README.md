@@ -20,12 +20,12 @@
 
 ## Description:
 
->The project must be implemented on the following stack:
->1. React 16+
->2. Redux + Redux toolkit (slice)
->3. Typescript
->4. React Router Dom v6
->5. Any UI library or libraries can be used
+The project must be implemented on the following stack:
+1. React 16+
+2. Redux + Redux toolkit (slice)
+3. Typescript
+4. React Router Dom v6
+5. Any UI library or libraries can be used
 ---
 - The layout should be px perf
 - Validations:
