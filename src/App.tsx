@@ -1,26 +1,27 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import Box from '@mui/material/Box';
 
-function App() {
+import OrdersTable from './components/OrdersTable/OrdersTable';
+import OrdersPagination from './components/OrdersPagination/OrdersPagination';
+import OrdersModal from './components/OrdersModal/OrdersModal';
+
+const style = {
+  display: 'flex',
+  flexDirection: 'column',
+  width: '1200px',
+  height: '100vh',
+  margin: '0 auto',
+  padding: '0 3px',
+};
+
+const App: React.FC = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Box  sx={style}>
+      <OrdersModal />
+      <OrdersTable />
+      <OrdersPagination />
+    </Box>
   );
-}
+};
 
 export default App;
