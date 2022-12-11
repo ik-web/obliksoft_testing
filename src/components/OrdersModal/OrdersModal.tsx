@@ -4,6 +4,8 @@ import Modal from "@mui/material/Modal";
 
 import { useAppDispatch, useAppSelector } from "../../hooks/customHooks";
 import { setIsModal } from "../../store/reducers/modalSlice";
+import OrdersModalTop from "./OrdersModalTop";
+import OrdersForm from "./OrdersForm";
 
 const OrdersModal: React.FC = () => {
   const { isModal } = useAppSelector((state) => state.modalReducer);
@@ -30,6 +32,8 @@ const OrdersModal: React.FC = () => {
             borderRadius: "4px",
           }}
         >
+          <OrdersModalTop handleClose={handleClose} />
+          <OrdersForm />
         </Box>
       </Modal>
     </div>
