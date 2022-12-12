@@ -12,11 +12,11 @@
   <img src="https://img.shields.io/badge/-redux-purple" alt="redux">
 </p>
 
-<!-- <p align="center">
-  <a href="https://github.com/ik-web">
+<p align="center">
+  <a href="https://ik-web.github.io/obliksoft_testing">
     >> DEMO LINK <<
   </a> 
-</p> -->
+</p>
 
 ## Description:
 
