@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Button from "@mui/material/Button";
 import ButtonGroup from "@mui/material/ButtonGroup";
 import Box from "@mui/material/Box";
@@ -44,6 +44,12 @@ const PaginationButtons: React.FC = () => {
       dispatch(setCurrentPage(page));
     },
   });
+
+  useEffect(() => {
+    if (currentPage > totalPages) {
+      dispatch(setCurrentPage(totalPages));
+    }
+  }, [totalPages]);
 
   return (
     <Box

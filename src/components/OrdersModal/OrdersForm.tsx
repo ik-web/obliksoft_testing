@@ -1,39 +1,46 @@
-import React from 'react';
-import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
-import { Button } from '@mui/material';
-import { styled } from '@mui/material/styles';
-import { Formik, Form } from 'formik';
+import React from "react";
+import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
+import { Button } from "@mui/material";
+import { styled } from "@mui/material/styles";
+import { Formik, Form } from "formik";
 
-import { formFields } from './FormFields/formFields';
-import { setIsModal } from '../../store/reducers/modalSlice';
-import { useAppDispatch } from '../../hooks/customHooks';
-import validationSchema from './validationScema';
-import { CustomTextField } from './FormFields/CustomTextFields';
+import { setIsModal } from "../../store/reducers/modalSlice";
+import { useAppDispatch } from "../../hooks/customHooks";
+import validationSchema from "./validationScema";
+import { FormFields } from "./FormFields/FormFields";
 
 export interface FormValues {
   order: string;
   fullName: string;
   email: string;
+  phoneNumber: string;
+  usersGroup: string;
+  language: string;
+  newField: string;
   fieldValue: string;
 }
 
 const initialValues: FormValues = {
-  order: '',
-  fullName: '',
-  email: '',
-  fieldValue: '',
+  order: "",
+  fullName: "",
+  email: "",
+  phoneNumber: "",
+  usersGroup: "",
+  language: "",
+  newField: "",
+  fieldValue: "",
 };
 
 const StyledSubmitButton = styled(Button)(({ theme }) => ({
-  padding: '10px 16px',
-  fontSize: '16px',
+  padding: "10px 16px",
+  fontSize: "16px",
   lineHeight: 1.25,
   fontWeight: 500,
   color: theme.palette.primary.main,
   border: `1px solid ${theme.palette.primary.main}`,
-  borderRadius: '4px',
-  '&:hover': {
+  borderRadius: "4px",
+  "&:hover": {
     color: theme.palette.common.white,
     background: theme.palette.primary.main,
   },
@@ -43,7 +50,7 @@ const OrdersForm: React.FC = () => {
   const dispatch = useAppDispatch();
 
   const hundleSubmit = (values: FormValues) => {
-    console.log('Submit', values);
+    console.log("Submit", values);
     dispatch(setIsModal());
   };
 
@@ -55,24 +62,19 @@ const OrdersForm: React.FC = () => {
     >
       {({ submitForm, isSubmitting }) => (
         <Form>
-          <Box sx={{ p: '10px 16px 22px' }}>
-            <Grid container sx={{ gap: '10px 23px' }}>
-              {formFields.map((field) => (
-                <Grid item key={field.label}>
-                  <CustomTextField
-                    name={field.name}
-                    type={field.type}
-                    placeholder={field.placeholder}
-                    label={field.label}
-                  />
+          <Box sx={{ p: "10px 16px 22px" }}>
+            <Grid container sx={{ gap: "10px 23px" }}>
+              {FormFields.map(({ id, component }) => (
+                <Grid item key={id}>
+                  {component}
                 </Grid>
               ))}
             </Grid>
 
-            <Box textAlign={'right'} sx={{ mt: '120px' }}>
+            <Box textAlign={"right"} sx={{ mt: "120px" }}>
               <StyledSubmitButton
-                variant='outlined'
-                type='submit'
+                variant="outlined"
+                type="submit"
                 disabled={isSubmitting}
                 onClick={submitForm}
               >

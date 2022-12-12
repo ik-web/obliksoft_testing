@@ -1,0 +1,113 @@
+$color_primaryMain: #2c7dfa;
+$color_grey: #dadfe4;
+$color_divider: #d2e2fc;
+$font_family: "IBM Plex Sans", sans-serif;
+
+@mixin arrowPart {
+  content: "";
+  position: absolute;
+
+  display: block;
+  width: 6px;
+  height: 2px;
+
+  background: $color_primaryMain;
+}
+
+.react-tel-input {
+  width: 275px;
+  height: 40px;
+  border-radius: 4px;
+
+  & .form-control {
+    width: 273px;
+    height: 38px;
+    padding: 0 10px 0 56px;
+
+    font-family: $font_family;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.7;
+
+    background: transparent;
+    border: none;
+    border-radius: 3px;
+
+    &::placeholder {
+      font-style: italic;
+      font-size: 14px;
+      font-weight: 300;
+      color: $color_grey;
+    }
+  }
+
+  & .flag-dropdown {
+    width: 46px;
+    height: 38px;
+
+    border: 1px solid $color_divider;
+    background: $color_divider;
+
+    & .selected-flag {
+      width: 100%;
+
+      & .arrow {
+        position: relative;
+        top: 7px;
+        left: 25px;
+
+        border: none;
+
+        &:before {
+          @include arrowPart;
+          right: -3px;
+          transform: rotate(45deg);
+        }
+
+        &:after {
+          @include arrowPart;
+          transform: rotate(-45deg);
+        }
+      }
+    }
+  }
+
+  & .country-list {
+    top: -12px;
+    left: -1px;
+    
+    width: 275px;
+
+    border: 1px solid $color_divider;
+
+    & .country {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      height: 40px;
+      padding: 0 8px;
+
+      font-family: $font_family;
+
+      border-bottom: 1px solid $color_divider;
+
+      &:last-of-type {
+        border-bottom: none;
+      }
+
+      &.highlight,
+      &:hover {
+        background: $color_divider;
+      }
+
+      & .flag {
+        margin: 0;
+      }
+
+      & .country-name {
+        margin: 0;
+      }
+    }
+  }
+}

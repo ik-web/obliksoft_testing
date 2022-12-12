@@ -25,6 +25,9 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
   borderBottom: `1px solid ${theme.palette.divider}`,
+  '&:last-of-type': {
+    borderBottom: 'none'
+  }
 }));
 
 const StyledLink = styled(Link)(({ theme }) => ({

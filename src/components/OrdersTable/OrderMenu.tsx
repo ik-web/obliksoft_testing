@@ -1,52 +1,55 @@
-import React from 'react';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
-import Fade from '@mui/material/Fade';
-import { IconButton, Typography } from '@mui/material';
-import { styled } from '@mui/material/styles';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
-import SaveAltIcon from '@mui/icons-material/SaveAlt';
-import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
-import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+import React, { useEffect } from "react";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import Fade from "@mui/material/Fade";
+import { IconButton, Typography } from "@mui/material";
+import { styled } from "@mui/material/styles";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
+import SaveAltIcon from "@mui/icons-material/SaveAlt";
+import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
+import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 
-import { removeOrder } from '../../store/reducers/ordersSlice';
-import { useAppDispatch } from '../../hooks/customHooks';
-import { setIsModal } from '../../store/reducers/modalSlice';
+import { removeOrder, selectTotalPages, setCurrentPage } from "../../store/reducers/ordersSlice";
+import { useAppDispatch, useAppSelector } from "../../hooks/customHooks";
+import { setIsModal } from "../../store/reducers/modalSlice";
+
+interface MenuItemInterface {
+    name: string,
+    icon: JSX.Element,
+    handler: () => void,
+}
 
 type Props = {
   id: number;
 };
 
 const StyledMenu = styled(Menu)(({ theme }) => ({
-  '& .MuiMenu-list': {
-    width: '272px',
-    padding: 0,
+  "& .MuiMenu-list": {
+    width: "272px",
     border: `1px solid ${theme.palette.divider}`,
-    borderRadius: '4px',
   },
 }));
 
 const StyledMenuItem = styled(MenuItem)(({ theme }) => ({
-  width: '100%',
-  gap: '13px',
+  width: "100%",
+  gap: "13px",
   height: 50,
-  padding: '0 13px',
+  padding: "0 13px",
   borderBottom: `1px solid ${theme.palette.divider}`,
-  '&:last-child': {
-    borderBottom: 'none',
+  "&:last-child": {
+    borderBottom: "none",
   },
 }));
 
 const StyledMenuIcon = styled(MoreVertIcon)(({ theme }) => ({
   fill: theme.palette.grey[50],
-  width: '24px',
-  height: '27px',
-  '&:hover': {
-    fill: theme.palette.grey[600],
-  },
+  width: "27px",
+  height: "27px",
 }));
 
 const OrderMenu: React.FC<Props> = ({ id }) => {
+  const { currentPage } = useAppSelector((state) => state.ordersReducer);
+  const totalPages = useAppSelector(selectTotalPages);
   const dispatch = useAppDispatch();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -73,20 +76,20 @@ const OrderMenu: React.FC<Props> = ({ id }) => {
     setAnchorEl(null);
   };
 
-  const menuItems = [
+  const menuItems: MenuItemInterface[] = [
     {
-      name: 'Редагувати',
-      icon: <EditOutlinedIcon color='primary' />,
+      name: "Редагувати",
+      icon: <EditOutlinedIcon color="primary" />,
       handler: handleEdit,
     },
     {
-      name: 'Зберегти як файл',
-      icon: <SaveAltIcon color='primary' />,
+      name: "Зберегти як файл",
+      icon: <SaveAltIcon color="primary" />,
       handler: handleSave,
     },
     {
-      name: 'Видалити',
-      icon: <DeleteOutlineIcon color='primary' />,
+      name: "Видалити",
+      icon: <DeleteOutlineIcon color="primary" />,
       handler: handleDelete,
     },
   ];
@@ -94,34 +97,31 @@ const OrderMenu: React.FC<Props> = ({ id }) => {
   return (
     <div>
       <IconButton
-        id='fade-button'
-        aria-controls={open ? 'fade-menu' : undefined}
-        aria-haspopup='true'
-        aria-expanded={open ? 'true' : undefined}
+        id="fade-button"
+        aria-controls={open ? "fade-menu" : undefined}
+        aria-haspopup="true"
+        aria-expanded={open ? "true" : undefined}
         onClick={handleClick}
-        sx={{
-          padding: '10px 0',
-          '&:hover': { background: 'none' }
-        }}
+        sx={{ p: '4px' }}
       >
         <StyledMenuIcon />
       </IconButton>
 
       <StyledMenu
-        id='fade-menu'
+        id="fade-menu"
         MenuListProps={{
-          'aria-labelledby': 'fade-button',
+          "aria-labelledby": "fade-button",
         }}
         anchorEl={anchorEl}
         anchorOrigin={{
-          vertical: 'top',
-          horizontal: 'right',
+          vertical: "top",
+          horizontal: "right",
         }}
         open={open}
         onClose={handleClose}
         TransitionComponent={Fade}
       >
-        {menuItems.map((item) => (
+        {menuItems.map((item: MenuItemInterface) => (
           <StyledMenuItem onClick={item.handler} key={item.name}>
             {item.icon}
             <Typography>{item.name}</Typography>

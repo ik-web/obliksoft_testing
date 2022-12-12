@@ -1,13 +1,10 @@
 import React from "react";
 import { styled, TextField } from "@mui/material";
-import { FormLabel, Typography } from "@mui/material";
+import { FormLabel, Typography, FormControl } from "@mui/material";
 import { useField } from "formik";
 
 export const StyledTextField = styled(TextField)(({ theme }) => ({
-  "& .MuiOutlinedInput-notchedOutline": {
-    borderColor: theme.palette.divider,
-  },
-  "& .MuiOutlinedInput-input": {
+"& .MuiOutlinedInput-input": {
     fontSize: "14px",
     fontWeight: 400,
     lineHeight: 1.7,
@@ -20,6 +17,12 @@ export const StyledTextField = styled(TextField)(({ theme }) => ({
       fontWeight: 300,
       color: theme.palette.grey[100],
     },
+  },
+  "& fieldset": {
+    borderColor: theme.palette.divider
+  },
+  "& .MuiOutlinedInput-root.Mui-focused fieldset": {
+    borderWidth: '1px'
   },
   "& .MuiFormHelperText-root": {
     display: "none",
@@ -36,16 +39,17 @@ export const CustomTextField: React.FC<any> = ({ label, ...props }) => {
       helpers.setTouched(true);
     }
   }
-
+  
   return (
-    <>
-      <FormLabel sx={{ m: 0 }}>
+    <FormControl>
+      <FormLabel htmlFor={field.name} sx={{ m: 0 }}>
         <Typography variant="h3">{label}</Typography>
       </FormLabel>
 
       <StyledTextField
         {...field}
         {...props}
+        id={field.name}
         error={isInvalid}
         color={isValid ? 'success' : ''}
         onFocus={handleFocus}
@@ -55,6 +59,6 @@ export const CustomTextField: React.FC<any> = ({ label, ...props }) => {
           }
         }}
       />
-    </>
+    </FormControl>
   );
 };

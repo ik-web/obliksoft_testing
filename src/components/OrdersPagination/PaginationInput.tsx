@@ -59,7 +59,7 @@ const PaginationInput: React.FC = () => {
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>): void => {
     const page: string = e.target.value;
-    if (+page > 0 && +page <= totalPages) {
+    if (+page <= totalPages) {
       setPage(page);
     }
   };
