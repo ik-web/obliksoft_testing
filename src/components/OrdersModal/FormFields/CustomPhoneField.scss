@@ -89,6 +89,7 @@ $font_family: "IBM Plex Sans", sans-serif;
       padding: 0 8px;
 
       font-family: $font_family;
+      font-size: 14px;
 
       border-bottom: 1px solid $color_divider;
 
@@ -107,6 +108,11 @@ $font_family: "IBM Plex Sans", sans-serif;
 
       & .country-name {
         margin: 0;
+      }
+
+      & .dial-code {
+        font-size: 14px;
+        color: $color_primaryMain;
       }
     }
   }

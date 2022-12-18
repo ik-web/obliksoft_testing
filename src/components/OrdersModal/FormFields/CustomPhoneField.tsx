@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import { FormLabel, Typography, FormControl } from "@mui/material";
 import { useField } from "formik";
 import PhoneInput from "react-phone-input-2";
 import { theme } from "../../../theme";
 import "react-phone-input-2/lib/style.css";
 import "./CustomPhoneField.scss";
+import Inputmask from "inputmask";
 
 const classes = {
   container: {
@@ -15,7 +16,7 @@ const classes = {
   },
   isValid: {
     borderColor: theme.palette.success.main,
-  }
+  },
 };
 
 const getBorderColorByValidation = (
@@ -28,43 +29,58 @@ const getBorderColorByValidation = (
 };
 
 const CustomPhoneField: React.FC<any> = (props) => {
+  const inputRef = useRef();
+  const input: any = inputRef.current;
+  const [inputMask, setInputMask] = useState<string>("");
   const [field, meta, helpers] = useField(props);
   const isValid = meta.touched && !meta.error;
   const isInvalid = meta.touched && !!meta.error;
 
-  const handleFocus = () => {
+  const handleValueChange = (phoneNumber: string, country: any) => {
+    if (country.format) {
+      const maskFormat = country.format
+        .split("")
+        .map((el: string) => (el === "." ? "9" : el))
+        .join("");
+
+      if (maskFormat !== inputMask) {
+        setInputMask(maskFormat);
+      }
+    }
+
     if (!meta.touched) {
       helpers.setTouched(true);
     }
-  };
-
-  const handleValueChange = (phoneNumber: string) => {
-    helpers.setTouched(true);
-    helpers.setValue(phoneNumber);
 
     if (field.onChange !== null) {
+      helpers.setValue(phoneNumber);
       field.onChange(phoneNumber);
     }
   };
+
+  if (input) {
+    Inputmask(inputMask).mask(input);
+  }
 
   return (
     <FormControl>
       <FormLabel htmlFor={field.name} sx={{ m: 0 }}>
         <Typography variant="h3">{props.label}</Typography>
       </FormLabel>
-      
+
       <PhoneInput
         {...props}
         {...field}
         id={field.name}
         name={field.name}
-        containerStyle={getBorderColorByValidation(isValid, isInvalid)}
-        onFocus={handleFocus}
         onChange={handleValueChange}
-        onlyCountries={["ua", "ge", "gb", "br", "br"]}
         prefix=""
-        inputProps={{ name: field.name }}
-        autocompleteSearch={true}
+        inputProps={{
+          name: field.name,
+          ref: inputRef,
+          placeholder: !field.value ? props.placeholder : "",
+        }}
+        containerStyle={getBorderColorByValidation(isValid, isInvalid)}
       />
     </FormControl>
   );
