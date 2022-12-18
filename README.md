@@ -40,8 +40,14 @@ The project must be implemented on the following stack:
 
 ## Documentation
 
-**The npm commands used to install the required node modules:**
-- `npx create-react-app my-app --template typescript`
+**The frameworks/libraries/modules used in the project**
+- React + Typescript `npx create-react-app my-app --template typescript`
+- Redux Toolkit `npm install @reduxjs/toolkit`
+- Material UI `npm install @mui/material @mui/styled-engine-sc styled-components`
+- Formik `npm install formik --save`
+- React-Phone-Input-2 `npm install react-phone-input-2 --save`
+- Yap `npm install -S yup`
+- gh-pages `npm install gh-pages --save-dev`
 
 ## Developers
 
