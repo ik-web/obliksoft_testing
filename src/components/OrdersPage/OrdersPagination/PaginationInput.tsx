@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent } from "react";
+import React, { useState, ChangeEvent, KeyboardEvent } from "react";
 import { Box, Button, TextField, Typography } from "@mui/material";
 import ForwardOutlinedIcon from "@mui/icons-material/ForwardOutlined";
 import { styled } from "@mui/material/styles";
@@ -6,8 +6,8 @@ import { styled } from "@mui/material/styles";
 import {
   selectTotalPages,
   setCurrentPage,
-} from "../../store/reducers/ordersSlice";
-import { useAppDispatch, useAppSelector } from "../../hooks/customHooks";
+} from "../../../store/reducers/ordersSlice";
+import { useAppDispatch, useAppSelector } from "../../../hooks/customHooks";
 
 const StyledTextField = styled(TextField)(({ theme }) => ({
   "& .MuiInputBase-input": {
@@ -25,7 +25,7 @@ const StyledTextField = styled(TextField)(({ theme }) => ({
     "&::placeholder": {
       position: "relative",
       right: "2px",
-      color: theme.palette.grey[100]
+      color: theme.palette.grey[100],
     },
   },
   "& .MuiOutlinedInput-notchedOutline": {
@@ -48,6 +48,12 @@ const PaginationInput: React.FC = () => {
   const dispatch = useAppDispatch();
 
   const [page, setPage] = useState<string>("");
+
+  const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      handleClick();
+    };
+  };
 
   const handleClick = (): void => {
     if (+page > 0 && +page <= totalPages) {
@@ -74,10 +80,11 @@ const PaginationInput: React.FC = () => {
       <Typography sx={{ mr: "9px" }}>Перейти на сторінку</Typography>
 
       <StyledTextField
-        onChange={handleChange}
         value={page}
         placeholder="|"
         type="number"
+        onChange={handleChange}
+        onKeyDown={handleKeyDown}
       />
 
       <StyledButton variant="contained" onClick={handleClick} disableElevation>

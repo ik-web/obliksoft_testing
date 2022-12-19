@@ -5,12 +5,9 @@ import Typography from "@mui/material/Typography";
 import CloseIcon from "@mui/icons-material/Close";
 import { IconButton } from "@mui/material";
 import { styled } from "@mui/material/styles";
+import { useNavigate } from "react-router-dom";
 
-type Props = {
-  handleClose: () => void;
-};
-
-const StyledWrapperBox = styled(Box)(({ theme }) => ({
+const StyledModalTopContainer = styled(Box)(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   justifyContent: "space-between",
@@ -25,21 +22,27 @@ const StyledCloseIcon = styled(CloseIcon)(({ theme }) => ({
   fill: theme.palette.grey[100],
 }));
 
-const OrdersModalTop: React.FC<Props> = ({ handleClose }) => {
+const OrdersModalTop: React.FC = () => {
+  const navigate = useNavigate();
+
+  const handleClose = () => {
+    navigate("/table");
+  };
+
   return (
-    <StyledWrapperBox>
+    <StyledModalTopContainer>
       <Box sx={{ display: "flex", alignItems: "center" }}>
-        <IconButton aria-label="delete">
+        <IconButton>
           <AddIcon color="primary" />
         </IconButton>
 
         <Typography variant="h2">Редагувати сутність</Typography>
       </Box>
 
-      <IconButton aria-label="delete" onClick={handleClose}>
+      <IconButton onClick={handleClose}>
         <StyledCloseIcon />
       </IconButton>
-    </StyledWrapperBox>
+    </StyledModalTopContainer>
   );
 };
 

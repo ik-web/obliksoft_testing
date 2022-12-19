@@ -80,6 +80,7 @@ const CustomPhoneField: React.FC<any> = (props) => {
           ref: inputRef,
           placeholder: !field.value ? props.placeholder : "",
         }}
+        preferredCountries={["ua", "us", "gb", "ca", "pl"]}
         containerStyle={getBorderColorByValidation(isValid, isInvalid)}
       />
     </FormControl>

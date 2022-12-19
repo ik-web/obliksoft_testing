@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ChangeEvent } from "react";
 import ListItemText from "@mui/material/ListItemText";
 import Select from "@mui/material/Select";
 import Radio from "@mui/material/Radio";
@@ -77,9 +77,16 @@ const CustomSelect: React.FC<any> = ({ label, ...props }) => {
   const isValid = meta.touched && !meta.error;
   const isInvalid = meta.touched && !!meta.error;
 
-  const handleFocus = () => {
+  const handleValueChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const inputValue: string = e.target.value;
+
     if (!meta.touched) {
       helpers.setTouched(true);
+    }
+
+    if (field.onChange !== null) {
+      helpers.setValue(inputValue);
+      field.onChange(inputValue);
     }
   };
 
@@ -95,7 +102,7 @@ const CustomSelect: React.FC<any> = ({ label, ...props }) => {
         id={field.name}
         error={isInvalid}
         color={isValid ? "success" : ""}
-        onFocus={handleFocus}
+        onChange={handleValueChange}
         IconComponent={ExpandMoreIcon}
         renderValue={(selected) => (selected ? selected : props.hint)}
         displayEmpty

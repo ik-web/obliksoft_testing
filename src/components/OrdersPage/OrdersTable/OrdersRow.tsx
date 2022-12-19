@@ -10,7 +10,7 @@ import {
 import { styled } from "@mui/material/styles";
 
 import OrderMenu from "./OrderMenu";
-import { OrderInterface } from "../../react-app-env";
+import { OrderInterface } from "../../../react-app-env";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.body}`]: {

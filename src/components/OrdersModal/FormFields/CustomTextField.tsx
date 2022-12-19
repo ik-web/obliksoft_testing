@@ -1,10 +1,10 @@
-import React from "react";
+import React, { ChangeEvent } from "react";
 import { styled, TextField } from "@mui/material";
 import { FormLabel, Typography, FormControl } from "@mui/material";
 import { useField } from "formik";
 
 export const StyledTextField = styled(TextField)(({ theme }) => ({
-"& .MuiOutlinedInput-input": {
+  "& .MuiOutlinedInput-input": {
     fontSize: "14px",
     fontWeight: 400,
     lineHeight: 1.7,
@@ -19,10 +19,10 @@ export const StyledTextField = styled(TextField)(({ theme }) => ({
     },
   },
   "& fieldset": {
-    borderColor: theme.palette.divider
+    borderColor: theme.palette.divider,
   },
   "& .MuiOutlinedInput-root.Mui-focused fieldset": {
-    borderWidth: '1px'
+    borderWidth: "1px",
   },
   "& .MuiFormHelperText-root": {
     display: "none",
@@ -33,13 +33,20 @@ export const CustomTextField: React.FC<any> = ({ label, ...props }) => {
   const [field, meta, helpers] = useField(props);
   const isValid = meta.touched && !meta.error;
   const isInvalid = meta.touched && !!meta.error;
-  
-  const handleFocus = () => {
+
+  const handleValueChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const inputValue: string = e.target.value;
+
     if (!meta.touched) {
       helpers.setTouched(true);
     }
-  }
-  
+
+    if (field.onChange !== null) {
+      helpers.setValue(inputValue);
+      field.onChange(inputValue);
+    }
+  };
+
   return (
     <FormControl>
       <FormLabel htmlFor={field.name} sx={{ m: 0 }}>
@@ -51,12 +58,12 @@ export const CustomTextField: React.FC<any> = ({ label, ...props }) => {
         {...props}
         id={field.name}
         error={isInvalid}
-        color={isValid ? 'success' : ''}
-        onFocus={handleFocus}
+        color={isValid ? "success" : ""}
+        onChange={handleValueChange}
         sx={{
           "& .MuiOutlinedInput-notchedOutline": {
-            borderColor: isValid && '#28A745',
-          }
+            borderColor: isValid && "#28A745",
+          },
         }}
       />
     </FormControl>

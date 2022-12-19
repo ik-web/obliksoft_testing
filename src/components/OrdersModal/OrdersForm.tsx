@@ -5,10 +5,9 @@ import { Button } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { Formik, Form } from "formik";
 
-import { setIsModal } from "../../store/reducers/modalSlice";
-import { useAppDispatch } from "../../hooks/customHooks";
 import validationSchema from "./validationScema";
 import { FormFields } from "./FormFields/FormFields";
+import { useNavigate } from "react-router-dom";
 
 export interface FormValues {
   order: string;
@@ -19,7 +18,7 @@ export interface FormValues {
   language: string;
   newField: string;
   fieldValue: string;
-}
+};
 
 const initialValues: FormValues = {
   order: "",
@@ -47,11 +46,11 @@ const StyledSubmitButton = styled(Button)(({ theme }) => ({
 }));
 
 const OrdersForm: React.FC = () => {
-  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const hundleSubmit = (values: FormValues) => {
     console.log("Submit", values);
-    dispatch(setIsModal());
+    navigate("/table");
   };
 
   return (

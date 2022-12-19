@@ -12,10 +12,10 @@ import OrdersTableSortButtons from "./OrdersTableSortButtons";
 import {
   selectOrders,
   setTotalOrdersOnPage,
-} from "../../store/reducers/ordersSlice";
-import { sortASC } from "../../store/reducers/ordersSlice";
-import { useAppDispatch, useAppSelector } from "../../hooks/customHooks";
-import { getTotalOrdersOnPage } from "../../helpers/getTotalOrdersOnPage";
+} from "../../../store/reducers/ordersSlice";
+import { sortASC } from "../../../store/reducers/ordersSlice";
+import { useAppDispatch, useAppSelector } from "../../../hooks/customHooks";
+import { getTotalOrdersOnPage } from "../../../helpers/getTotalOrdersOnPage";
 
 const StyledTable = styled(Table)(({ theme }) => ({
   tableLayout: "fixed",

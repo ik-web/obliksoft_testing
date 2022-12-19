@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Fade from "@mui/material/Fade";
@@ -8,19 +8,19 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import SaveAltIcon from "@mui/icons-material/SaveAlt";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
+import { useNavigate } from "react-router-dom";
 
-import { removeOrder, selectTotalPages, setCurrentPage } from "../../store/reducers/ordersSlice";
-import { useAppDispatch, useAppSelector } from "../../hooks/customHooks";
-import { setIsModal } from "../../store/reducers/modalSlice";
-
-interface MenuItemInterface {
-    name: string,
-    icon: JSX.Element,
-    handler: () => void,
-}
+import { removeOrder } from "../../../store/reducers/ordersSlice";
+import { useAppDispatch } from "../../../hooks/customHooks";
 
 type Props = {
   id: number;
+};
+
+interface MenuItemInterface {
+  name: string;
+  icon: JSX.Element;
+  handler: () => void;
 };
 
 const StyledMenu = styled(Menu)(({ theme }) => ({
@@ -36,7 +36,7 @@ const StyledMenuItem = styled(MenuItem)(({ theme }) => ({
   height: 50,
   padding: "0 13px",
   borderBottom: `1px solid ${theme.palette.divider}`,
-  "&:last-child": {
+  "&:last-of-type": {
     borderBottom: "none",
   },
 }));
@@ -48,8 +48,7 @@ const StyledMenuIcon = styled(MoreVertIcon)(({ theme }) => ({
 }));
 
 const OrderMenu: React.FC<Props> = ({ id }) => {
-  const { currentPage } = useAppSelector((state) => state.ordersReducer);
-  const totalPages = useAppSelector(selectTotalPages);
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -58,16 +57,11 @@ const OrderMenu: React.FC<Props> = ({ id }) => {
     setAnchorEl(event.currentTarget);
   };
 
+  const handleEditMode = () => {
+    navigate("/modal");
+  };
+
   const handleClose = () => {
-    setAnchorEl(null);
-  };
-
-  const handleEdit = () => {
-    dispatch(setIsModal());
-    setAnchorEl(null);
-  };
-
-  const handleSave = () => {
     setAnchorEl(null);
   };
 
@@ -80,12 +74,12 @@ const OrderMenu: React.FC<Props> = ({ id }) => {
     {
       name: "Редагувати",
       icon: <EditOutlinedIcon color="primary" />,
-      handler: handleEdit,
+      handler: handleEditMode,
     },
     {
       name: "Зберегти як файл",
       icon: <SaveAltIcon color="primary" />,
-      handler: handleSave,
+      handler: handleClose,
     },
     {
       name: "Видалити",
@@ -102,7 +96,7 @@ const OrderMenu: React.FC<Props> = ({ id }) => {
         aria-haspopup="true"
         aria-expanded={open ? "true" : undefined}
         onClick={handleClick}
-        sx={{ p: '4px' }}
+        sx={{ p: "4px" }}
       >
         <StyledMenuIcon />
       </IconButton>

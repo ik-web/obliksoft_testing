@@ -9,11 +9,11 @@ import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import { styled } from "@mui/material/styles";
 
-import { useAppDispatch, useAppSelector } from "../../hooks/customHooks";
+import { useAppDispatch, useAppSelector } from "../../../hooks/customHooks";
 import {
   selectTotalPages,
   setCurrentPage,
-} from "../../store/reducers/ordersSlice";
+} from "../../../store/reducers/ordersSlice";
 
 const StyledButton = styled(Button)(({ theme }) => ({
   padding: 0,

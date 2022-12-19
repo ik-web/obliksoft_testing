@@ -5,29 +5,17 @@ import { CustomTextField } from "./CustomTextField";
 interface FormField {
   id: number;
   component: JSX.Element;
-}
+};
 
 export interface SelectInterface {
   option: string;
   value: string;
-}
+};
 
-const usersGroupOptions: string[] = [
-  "Група-1",
-  "Група-2",
-  "Група-3"
-];
-const languageOptions: string[] = [
-  "Українська",
-  "Англійська",
-  "Португальська"
-];
+const usersGroupOptions: string[] = ["Група-1", "Група-2", "Група-3"];
+const languageOptions: string[] = ["Українська", "Англійська", "Португальська"];
 
-const newFieldOptions: string[] = [
-  "Teкст-1",
-  "Teкст-2",
-  "Teкст-3"
-];
+const newFieldOptions: string[] = ["Teкст-1", "Teкст-2", "Teкст-3"];
 
 export const FormFields: FormField[] = [
   {

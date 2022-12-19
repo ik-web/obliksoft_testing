@@ -3,8 +3,8 @@ import { Box } from "@mui/material";
 
 import PaginationInput from "./PaginationInput";
 import PaginationButtons from "./PaginationButtons";
-import { useAppSelector } from "../../hooks/customHooks";
-import { selectTotalPages } from "../../store/reducers/ordersSlice";
+import { useAppSelector } from "../../../hooks/customHooks";
+import { selectTotalPages } from "../../../store/reducers/ordersSlice";
 
 const OrdersPagination: React.FC = () => {
   const totalPages = useAppSelector(selectTotalPages);

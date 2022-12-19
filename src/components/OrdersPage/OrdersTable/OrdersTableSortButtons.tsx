@@ -5,9 +5,9 @@ import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { styled } from "@mui/material/styles";
 
-import { sortASC } from "../../store/reducers/ordersSlice";
-import { sortDESC } from "../../store/reducers/ordersSlice";
-import { useAppDispatch, useAppSelector } from "../../hooks/customHooks";
+import { sortASC } from "../../../store/reducers/ordersSlice";
+import { sortDESC } from "../../../store/reducers/ordersSlice";
+import { useAppDispatch, useAppSelector } from "../../../hooks/customHooks";
 
 const StyledButtonsContainer = styled(Box)({
   display: "flex",
