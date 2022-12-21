@@ -47,6 +47,8 @@ The project must be implemented on the following stack:
 - Formik `npm install formik --save`
 - React-Phone-Input-2 `npm install react-phone-input-2 --save`
 - Yap `npm install -S yup`
+- Inputmask `npm i inputmask`
+- Libphonenumber `npm install libphonenumber-js --save`
 - gh-pages `npm install gh-pages --save-dev`
 
 ## Developers
