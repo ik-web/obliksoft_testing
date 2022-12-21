@@ -1,5 +1,5 @@
 <h1 align="center">
-  Test task
+  OblikSoft testing
 </h1>
 
 <p align="center">
