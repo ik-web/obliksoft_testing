@@ -38,6 +38,11 @@ const StyledSelect = styled(Select)(({ theme }) => ({
   },
 }));
 
+const StyledFormLabel = styled(FormLabel)(({ theme }) => ({
+  margin: 0,
+  "&.Mui-focused": { color: theme.palette.text.primary },
+}));
+
 const StyledMenuItem = styled(MenuItem)(({ theme }) => ({
   height: 40,
   padding: "8px 14px 8px 4px",
@@ -92,9 +97,9 @@ const CustomSelect: React.FC<any> = ({ label, ...props }) => {
 
   return (
     <FormControl>
-      <FormLabel htmlFor={field.name} sx={{ m: 0 }}>
+      <StyledFormLabel htmlFor={field.name}>
         <Typography variant="h3">{label}</Typography>
-      </FormLabel>
+      </StyledFormLabel>
 
       <StyledSelect
         {...field}
